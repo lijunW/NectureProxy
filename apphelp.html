@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 动态标题通过JavaScript设置 -->
+    <title id="pageTitle"></title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* 原有样式保持不变 */
+        :root { /* ... */ }
+        * { /* ... */ }
+        /* 其他样式规则... */
+    </style>
+</head>
+<body>
+    <div class="support-wrapper">
+        <!-- 顶部横幅 -->
+        <div class="hero-section">
+            <h1 class="hero-title" id="mainHeader">
+                <i class="fas fa-coins"></i>
+                <span id="appNameHeader"></span>
+            </h1>
+            <!-- 其他内容保持不变... -->
+        </div>
+
+        <!-- 联系方式 -->
+        <div class="contact-section">
+            <p style="margin:1rem 0;">
+                <a id="supportEmail" href="#" style="color:var(--primary);">
+                    <i class="fas fa-envelope"></i> 
+                    <span>邮件支持</span>
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 应用全局配置常量
+        const APP_CONFIG = {
+            appName: '奇传簿客',          // 应用显示名称
+            technicalName: 'SuishouJi', // 技术名称（用于邮箱等）
+            supportEmail: 'SuishouJiSupport133@gmail.com',
+            currentYear: new Date().getFullYear()
+        };
+
+        // DOM元素映射表
+        const ELEMENTS = {
+            title: document.getElementById('pageTitle'),
+            appNameHeader: document.getElementById('appNameHeader'),
+            mainHeader: document.getElementById('mainHeader'),
+            supportEmail: document.getElementById('supportEmail')
+        };
+
+        // 初始化应用配置
+        function initAppConfig() {
+            // 设置页面标题
+            ELEMENTS.title.textContent = `「${APP_CONFIG.appName}」技术支持中心`;
+            
+            // 设置主标题
+            ELEMENTS.appNameHeader.textContent = `${APP_CONFIG.appName}技术支持`;
+            
+            // 设置支持邮箱
+            ELEMENTS.supportEmail.href = `mailto:${APP_CONFIG.supportEmail}`;
+            ELEMENTS.supportEmail.querySelector('span').textContent = APP_CONFIG.supportEmail;
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            initAppConfig();
+            // 其他初始化逻辑...
+        });
+    </script>
+</body>
+</html>
