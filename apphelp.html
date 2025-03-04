@@ -3,72 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 动态标题通过JavaScript设置 -->
-    <title id="pageTitle"></title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>{{APP_NAME}} - 技术支持</title>
     <style>
-        /* 原有样式保持不变 */
-        :root { /* ... */ }
-        * { /* ... */ }
-        /* 其他样式规则... */
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --text-color: #2c3e50;
+            --background-color: #f9f9f9;
+            --card-background: #ffffff;
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --card-border-radius: 12px;
+            --input-border: #ddd;
+            --input-focus-border: #2ecc71;
+            --error-color: #e74c3c;
+            --success-color: #2ecc71;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 1rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1, h2 {
+            color: var(--primary-color);
+        }
+        .section {
+            background-color: var(--card-background);
+            box-shadow: var(--card-shadow);
+            border-radius: var(--card-border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+        .faq-item h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+        .faq-item p {
+            margin: 0.5rem 0 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .contact-info a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .feedback-form input, .feedback-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--input-border);
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .feedback-form input:focus, .feedback-form textarea:focus {
+            border-color: var(--input-focus-border);
+            outline: none;
+        }
+        .feedback-form button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .feedback-form button:hover {
+            background-color: var(--secondary-color);
+        }
+        .loading {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .loading .spinner {
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .result-message {
+            display: none;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .result-message.success {
+            background-color: var(--success-color);
+            color: white;
+        }
+        .result-message.error {
+            background-color: var(--error-color);
+            color: white;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            .section {
+                padding: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="support-wrapper">
-        <!-- 顶部横幅 -->
-        <div class="hero-section">
-            <h1 class="hero-title" id="mainHeader">
-                <i class="fas fa-coins"></i>
-                <span id="appNameHeader"></span>
-            </h1>
-            <!-- 其他内容保持不变... -->
+    <div class="container">
+        <h1 id="appName"></h1>
+        <!-- 常见问题解答 -->
+        <div class="section">
+            <h2>常见问题解答</h2>
+            <div class="faq-item">
+                <h3>如何备份数据？</h3>
+                <p>在设置页面中，选择“数据备份”，您可以选择本地备份或iCloud同步。</p>
+            </div>
+            <div class="faq-item">
+                <h3>如何恢复数据？</h3>
+                <p>在设置页面中，选择“数据恢复”，从本地或iCloud中选择备份文件即可。</p>
+            </div>
         </div>
-
         <!-- 联系方式 -->
-        <div class="contact-section">
-            <p style="margin:1rem 0;">
-                <a id="supportEmail" href="#" style="color:var(--primary);">
-                    <i class="fas fa-envelope"></i> 
-                    <span>邮件支持</span>
-                </a>
-            </p>
+        <div class="section">
+            <h2>联系我们</h2>
+            <div class="contact-info">
+                <p>如果您有其他问题，请通过以下方式联系我们：</p>
+                <a id="contactEmail" href=""></a>
+                <a id="contactPhone" href=""></a>
+            </div>
+        </div>
+        <!-- 用户反馈表单 -->
+        <div class="section">
+            <h2>用户反馈</h2>
+            <form class="feedback-form" id="feedbackForm">
+                <input type="text" placeholder="您的姓名" required>
+                <input type="email" placeholder="您的邮箱" required>
+                <textarea rows="5" placeholder="请描述您的问题或建议" required></textarea>
+                <button type="submit">提交反馈</button>
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <span>提交中...</span>
+                </div>
+                <div class="result-message" id="resultMessage"></div>
+            </form>
         </div>
     </div>
-
     <script>
-        // 应用全局配置常量
-        const APP_CONFIG = {
-            appName: '奇传簿客',          // 应用显示名称
-            technicalName: 'SuishouJi', // 技术名称（用于邮箱等）
-            supportEmail: 'SuishouJiSupport133@gmail.com',
-            currentYear: new Date().getFullYear()
+        // 配置信息
+        const config = {
+            appName: "奇传簿客", // 应用名称
+            contactEmail: "netcure312privacy@gmail.com", // 联系邮箱
+            contactPhone: "+8615544332485", // 联系电话
         };
-
-        // DOM元素映射表
-        const ELEMENTS = {
-            title: document.getElementById('pageTitle'),
-            appNameHeader: document.getElementById('appNameHeader'),
-            mainHeader: document.getElementById('mainHeader'),
-            supportEmail: document.getElementById('supportEmail')
-        };
-
-        // 初始化应用配置
-        function initAppConfig() {
-            // 设置页面标题
-            ELEMENTS.title.textContent = `「${APP_CONFIG.appName}」技术支持中心`;
-            
-            // 设置主标题
-            ELEMENTS.appNameHeader.textContent = `${APP_CONFIG.appName}技术支持`;
-            
-            // 设置支持邮箱
-            ELEMENTS.supportEmail.href = `mailto:${APP_CONFIG.supportEmail}`;
-            ELEMENTS.supportEmail.querySelector('span').textContent = APP_CONFIG.supportEmail;
-        }
-
-        // 页面加载完成后初始化
-        document.addEventListener('DOMContentLoaded', () => {
-            initAppConfig();
-            // 其他初始化逻辑...
+        // 动态填充配置信息
+        document.getElementById('appName').textContent = `${config.appName} - 技术支持`;
+        document.getElementById('contactEmail').textContent = `📧 ${config.contactEmail}`;
+        document.getElementById('contactEmail').href = `mailto:${config.contactEmail}`;
+        document.getElementById('contactPhone').textContent = `📞 ${config.contactPhone}`;
+        document.getElementById('contactPhone').href = `tel:${config.contactPhone}`;
+        // 提交反馈逻辑
+        document.getElementById('feedbackForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // 阻止表单默认提交行为
+            // 显示加载动画
+            const loading = document.getElementById('loading');
+            const resultMessage = document.getElementById('resultMessage');
+            loading.style.display = 'flex';
+            resultMessage.style.display = 'none';
+            // 模拟网络请求
+            setTimeout(() => {
+                loading.style.display = 'none';
+                const isSuccess = Math.random() > 0.5; // 模拟成功或失败
+                if (isSuccess) {
+                    resultMessage.textContent = '提交成功！我们会尽快联系您。';
+                    resultMessage.className = 'result-message success';
+                } else {
+                    resultMessage.textContent = '提交失败，请检查网络后重试。';
+                    resultMessage.className = 'result-message error';
+                }
+                resultMessage.style.display = 'block';
+            }, 2000); // 模拟2秒的请求时间
         });
     </script>
 </body>
